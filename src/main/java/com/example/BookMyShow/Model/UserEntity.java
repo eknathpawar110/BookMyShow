@@ -1,31 +1,31 @@
 package com.example.BookMyShow.Model;
-
-
-
 import jakarta.persistence.*;
 import lombok.*;
+
 
 import java.util.List;
 
 
-@Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Table(name="users")
+@Entity
+@Table(name = "users")
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name",nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "mobile",nullable = false)
-    private  String mobile;
 
-     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-     private List<TicketEntity> tickets;
+    @Column(name = "mobile", nullable = false)
+    private String mobile;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL) //bidirectional mapping
+    private List<TicketEntity> ticketEntities;
+
 }

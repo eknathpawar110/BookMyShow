@@ -1,24 +1,24 @@
 package com.example.BookMyShow.Model;
 
+
 import com.example.BookMyShow.enums.SeatType;
-import com.example.BookMyShow.enums.TheatreType;
+import com.example.BookMyShow.enums.TheaterType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
+@Entity
+@Table(name = "theaters")
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Table(name="theatres")
-public class TheatreEntity {
+public class TheaterEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,21 +27,20 @@ public class TheatreEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "address", nullable = false)
-    private String address;
 
     @Column(name = "city", nullable = false)
     private String city;
 
+    @Column(name = "address", nullable = false)
+    private String address;
 
-    @OneToMany(mappedBy = "theatre",cascade = CascadeType.ALL)//Bidirectional relationship
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     @JsonIgnore
-    private  List<ShowEntity> show;
+    private List<ShowEntity> shows;
 
-    TheatreType theatreType;
+    TheaterType type;
 
-    @OneToMany(mappedBy = "theatre",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<TheatreSeatEntity> seats = new ArrayList<>();
-
+    private List<TheaterSeatsEntity> seats = new ArrayList<>();
 }

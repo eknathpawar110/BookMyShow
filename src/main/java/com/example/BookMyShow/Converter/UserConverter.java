@@ -1,18 +1,33 @@
-package com.example.BookMyShow.Converter;
-
+package com.example.BookMyShow.converter;
 
 import com.example.BookMyShow.Model.UserEntity;
-import com.example.BookMyShow.dto.UserDto;
+import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
+import com.example.BookMyShow.dto.EntryDto.UserEntryDto;
+import com.example.BookMyShow.dto.ResponseDto.UserResponseDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class UserConverter {
 
-    public static UserEntity dtoToEntity(UserDto userDto){
-        return  UserEntity.builder().name(userDto.getName()).mobile(userDto.getMobile()).build();
+
+    public static UserEntity convertDtoToEntity(UserEntryDto userEntryDto){
+
+        //.builder() is a method
+
+        //I need to create the User
+        return UserEntity.builder().name(userEntryDto.getName()).mobile(userEntryDto.getMobNo()).build();
+
+
+        //Second method for creating the object ??
+        //Using the new keyword
+
     }
 
-    public static UserDto entityToDTO(UserEntity userEntity){
-        return  UserDto.builder().id(userEntity.getId()).name(userEntity.getName()).mobile(userEntity.getMobile()).build();
+    public static UserResponseDto convertEntityToDto(UserEntity user){
+
+        return UserResponseDto.builder().id(user.getId()).name(user.getName())
+                .mobNo(user.getMobile()).build();
+
     }
+
 }

@@ -1,46 +1,52 @@
 package com.example.BookMyShow.Model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
-
-@Entity
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-@Table(name="tickets")
+@Entity
+@EntityListeners(value = { AuditingEntityListener.class })
+@Table(name = "tickets")
+@NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class TicketEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name="allottedSeat",nullable = false)
-    private String allottedSeat;
-    @Column(name = "amount",nullable = false)
-    private double amount; //Change
-    @Column(name = "bookedAt",nullable = false)
+
+    @Column(name = "alloted_seats", nullable = false)
+    private String allottedSeats;
+
+    @Column(name = "amount", nullable = false)
+    private double amount;
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "booked_at", nullable = false)
     private Date bookedAt;
 
     @ManyToOne
-    @JoinColumn
     @JsonIgnore
+    @JoinColumn
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn
     @JsonIgnore
+    @JoinColumn
     private ShowEntity show;
 
-    @OneToMany(mappedBy = "tickets",cascade = CascadeType.ALL)
-    private List<ShowSeatEntity> seats;
-
+    @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ShowSeatsEntity> seats;
 }
