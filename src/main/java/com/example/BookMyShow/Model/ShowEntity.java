@@ -18,7 +18,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@EntityListeners(value = { AuditingEntityListener.class })
+@EntityListeners(value = { AuditingEntityListener.class }) //doubt
 @Table(name = "shows")
 @NoArgsConstructor
 @Builder
@@ -36,7 +36,7 @@ public class ShowEntity {
     private LocalTime showTime;
 
 
-    @CreationTimestamp
+    @CreationTimestamp //doubt
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at")
     private Date createdAt;

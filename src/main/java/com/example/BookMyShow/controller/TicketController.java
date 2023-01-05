@@ -15,7 +15,7 @@ public class TicketController {
     @Autowired
     TicketServiceImpl ticketService;
 
-    @GetMapping("get/{id}")
+    @GetMapping("/get-ticket/{id}")
     public TicketResponseDto getTicketById(@PathVariable Integer id){
 
         return ticketService.getTicket(id);
@@ -25,7 +25,6 @@ public class TicketController {
     public TicketResponseDto addTicket(@RequestBody() BookTicketRequestDto bookTicketRequestDto){
 
 
-        log.info("In controller");
         return ticketService.bookTicket(bookTicketRequestDto);
 
     }

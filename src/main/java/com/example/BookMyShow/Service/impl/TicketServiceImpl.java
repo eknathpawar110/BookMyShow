@@ -1,5 +1,7 @@
 package com.example.BookMyShow.Service.impl;
 
+import com.example.BookMyShow.Converter.ShowConvertor;
+import com.example.BookMyShow.Converter.TicketConverter;
 import com.example.BookMyShow.Model.ShowEntity;
 import com.example.BookMyShow.Model.ShowSeatsEntity;
 import com.example.BookMyShow.Model.TicketEntity;
@@ -8,12 +10,11 @@ import com.example.BookMyShow.Repository.ShowRepository;
 import com.example.BookMyShow.Repository.TicketRepository;
 import com.example.BookMyShow.Repository.UserRepository;
 import com.example.BookMyShow.Service.TicketService;
-import com.example.BookMyShow.converter.ShowConvertor;
-import com.example.BookMyShow.converter.TicketConverter;
-import com.example.BookMyShow.converter.UserConverter;
+
 import com.example.BookMyShow.dto.BookTicketRequestDto;
 import com.example.BookMyShow.dto.ResponseDto.TicketResponseDto;
-import lombok.extern.slf4j.Slf4j;
+import com.example.BookMyShow.dto.TicketDto;
+import com.example.BookMyShow.enums.SeatType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class TicketServiceImpl implements TicketService {
 
     @Autowired
@@ -35,12 +36,11 @@ public class TicketServiceImpl implements TicketService {
     @Autowired
     TicketRepository ticketRepository;
 
-  @Override
+    @Override
     public TicketResponseDto getTicket(int id) {
 
         TicketEntity ticketEntity = ticketRepository.findById(id).get();
 
-        UserConverter TicketConvertor;
         TicketResponseDto ticketResponseDto = TicketConverter.convertEntityToDto(ticketEntity);
 
         return ticketResponseDto;
@@ -54,14 +54,10 @@ public class TicketServiceImpl implements TicketService {
         UserEntity userEntity = userRepository.findById(bookTicketRequestDto.getId()).get();
         ShowEntity showEntity = showRepository.findById(bookTicketRequestDto.getShowId()).get();
 
-        log.info("Ticket half processed");
-
         Set<String> requestSeats = bookTicketRequestDto.getRequestedSeats();
 
 
         List<ShowSeatsEntity> showSeatsEntityList = showEntity.getSeats();
-
-        // for(ShowSeatsEntity seat: showSeatsEntityList) System.out.print(seat+" ");
 
 
 //        //Another way to iterate. Try to study about it.
@@ -82,7 +78,6 @@ public class TicketServiceImpl implements TicketService {
             }
         }
 
-        for(ShowSeatsEntity seat: bookedSeats) System.out.println(seat);
         if(bookedSeats.size()!=requestSeats.size()){
             //Al the seats were not avaiable
             throw new Error("All Seats not available");

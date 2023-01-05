@@ -1,8 +1,8 @@
 package com.example.BookMyShow.dto.EntryDto;
 
-
 import com.example.BookMyShow.dto.ResponseDto.MovieResponseDto;
 import com.example.BookMyShow.dto.ResponseDto.TheaterResponseDto;
+
 import lombok.Builder;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;

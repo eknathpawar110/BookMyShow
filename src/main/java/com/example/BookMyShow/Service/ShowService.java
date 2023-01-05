@@ -9,4 +9,5 @@ public interface ShowService {
 
     //Get show
     //Complete
+    ShowResponseDto getShow(int id);
 }

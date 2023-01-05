@@ -1,4 +1,4 @@
-package com.example.BookMyShow.converter;
+package com.example.BookMyShow.Converter;
 
 import com.example.BookMyShow.Model.TicketEntity;
 import com.example.BookMyShow.dto.ResponseDto.TicketResponseDto;

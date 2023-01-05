@@ -4,10 +4,7 @@ import com.example.BookMyShow.Service.impl.TheaterServiceImpl;
 import com.example.BookMyShow.dto.EntryDto.TheaterEntryDto;
 import com.example.BookMyShow.dto.ResponseDto.TheaterResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("theater")
@@ -17,11 +14,16 @@ public class TheaterController {
     TheaterServiceImpl theaterService;
 
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public TheaterResponseDto addTheater(@RequestBody() TheaterEntryDto theaterEntryDto){
 
         return theaterService.addTheater(theaterEntryDto);
 
+    }
+
+    @GetMapping("/getTheaterDetails/{id}")
+    public TheaterResponseDto getTheaterDetails(@PathVariable("id") int theaterId){
+        return theaterService.getTheater(theaterId);
     }
 
 }

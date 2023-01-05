@@ -1,11 +1,10 @@
 package com.example.BookMyShow.Service.impl;
 
-
-
+import com.example.BookMyShow.Converter.MovieConverter;
 import com.example.BookMyShow.Model.MovieEntity;
 import com.example.BookMyShow.Repository.MovieRepository;
 import com.example.BookMyShow.Service.MovieService;
-import com.example.BookMyShow.converter.MovieConverter;
+
 import com.example.BookMyShow.dto.EntryDto.MovieEntryDto;
 import com.example.BookMyShow.dto.ResponseDto.MovieNameAndIdObject;
 import com.example.BookMyShow.dto.ResponseDto.MovieResponseDto;

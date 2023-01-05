@@ -9,7 +9,6 @@ public class TicketResponseDto {
 
 
     int id;
-
     String alloted_seats;
     double amount;
 

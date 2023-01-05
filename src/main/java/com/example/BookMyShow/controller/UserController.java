@@ -17,7 +17,7 @@ public class UserController {
     @Autowired
     UserServiceImpl userService;
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public ResponseEntity addUser(@RequestBody UserEntryDto userEntryDto){
 
         userService.addUser(userEntryDto);
@@ -26,7 +26,7 @@ public class UserController {
 
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/get-user/{id}")
     public ResponseEntity<UserResponseDto> getUser(@PathVariable(value = "id")int id){
 
         UserResponseDto userResponseDto = userService.getUser(id);

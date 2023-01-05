@@ -1,11 +1,12 @@
 package com.example.BookMyShow.Service.impl;
 
+import com.example.BookMyShow.Converter.TheaterConverter;
 import com.example.BookMyShow.Model.TheaterEntity;
 import com.example.BookMyShow.Model.TheaterSeatsEntity;
 import com.example.BookMyShow.Repository.TheaterRepository;
 import com.example.BookMyShow.Repository.TheaterSeatsRepository;
 import com.example.BookMyShow.Service.TheaterService;
-import com.example.BookMyShow.converter.TheaterConverter;
+
 import com.example.BookMyShow.dto.EntryDto.TheaterEntryDto;
 import com.example.BookMyShow.dto.ResponseDto.TheaterResponseDto;
 import com.example.BookMyShow.enums.SeatType;
@@ -32,10 +33,8 @@ public class TheaterServiceImpl implements TheaterService {
 
         TheaterEntity theaterEntity = TheaterConverter.convertDtoToEntity(theaterEntryDto);
 
-
         //create the Seats
         List<TheaterSeatsEntity> seats = createTheaterSeats();
-
 
         theaterEntity.setSeats(seats);
         //I need to set the theaterId for all these seats
@@ -51,10 +50,10 @@ public class TheaterServiceImpl implements TheaterService {
         log.info("The theater entity is "+ theaterEntity);
 
         theaterEntity = theaterRepository.save(theaterEntity);
+
         theaterSeatsRepository.saveAll(seats);
 
         TheaterResponseDto theaterResponseDto = TheaterConverter.convertEntityToDto(theaterEntity);
-
 
         return theaterResponseDto;
 
@@ -87,7 +86,7 @@ public class TheaterServiceImpl implements TheaterService {
         return TheaterSeatsEntity.builder().seatNumber(seatName).rate(rate).seatType(seatType).build();
     }
 
-    //Seperate function will be create...
+    //Separate function will be created...
 
 
     @Override
